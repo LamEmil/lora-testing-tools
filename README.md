@@ -1,7 +1,5 @@
 # LoRA Model Comparison Tools for ComfyUI
 
-![LoRA Voter UI](ui_examples/lora_model_voter_ui_example.png)
-
 This repository contains two Python scripts designed to help you compare and evaluate different LoRA (Low-Rank Adaptation) models within the ComfyUI image generation platform. These tools automate the process of generating images with multiple LoRAs and prompts, making it easier to see how each LoRA affects the output.
 
 The tools are built using Python and the PySide6 library for the user interface. They interact with a running ComfyUI instance through its API.
@@ -65,6 +63,8 @@ The LoRA Voter is an interactive tool for ranking your LoRA models based on a se
 5.  **Vote**: Once the images are ready, they will be displayed in a shuffled order. Click on the image that you think best represents the prompt shown on the left panel.
 6.  **Continue**: As soon as you vote, the application records your choice, clears the grid, and automatically starts the next round with a new prompt.
 7.  **View Scores**: After 10 rounds, a message box will appear with the final scores for each LoRA model.
+
+![LoRA Voter UI](ui_examples/lora_model_voter_ui_example.png)
 
 ---
 ## Grid Maker (`grid_maker.py`)
