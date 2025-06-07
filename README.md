@@ -1,4 +1,4 @@
-# LoRA Model Comparison Tools for ComfyUI
+# LoRA Model Comparison Tools for use alongside ComfyUI
 
 This folder contains two Python scripts designed to help you compare and evaluate different LoRA (Low-Rank Adaptation) models within the ComfyUI image generation platform. These tools automate the process of generating images with multiple LoRAs and prompts, making it easier to see how each LoRA affects the output.
 
