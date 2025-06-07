@@ -1,15 +1,19 @@
-# LoRA Model Comparison Tools for use alongside ComfyUI
+# LoRA Model Comparison Tools for ComfyUI
 
-This folder contains two Python scripts designed to help you compare and evaluate different LoRA (Low-Rank Adaptation) models within the ComfyUI image generation platform. These tools automate the process of generating images with multiple LoRAs and prompts, making it easier to see how each LoRA affects the output.
+![LoRA Voter UI](ui_examples/lora_model_voter_ui_example.jpg)
 
-The tools are built using Python and the PySide6 library for the user interface. They interact with a running ComfyUI instance through its local API.
+This repository contains two Python scripts designed to help you compare and evaluate different LoRA (Low-Rank Adaptation) models within the ComfyUI image generation platform. These tools automate the process of generating images with multiple LoRAs and prompts, making it easier to see how each LoRA affects the output.
 
+The tools are built using Python and the PySide6 library for the user interface. They interact with a running ComfyUI instance through its API.
+
+---
 ## Included Files
 
-* `lora_voter.py`: A graphical application that allows you to conduct a blind A/B test between two or more LoRA models. It presents you with images generated from the same prompt and seed across different LoRAs, and you vote for the one that best fits the prompt. At the end it tells you the results of your vote. Ideal for choosing which lora epoch to stick with after training.
+* `lora_voter.py`: A graphical application that allows you to conduct a blind A/B test between two or more LoRA models. It presents you with images generated from the same prompt and seed across different LoRAs, and you vote for the one that best fits the prompt.
 * `grid_maker.py`: A script that generates a comparison grid of images. It systematically creates an image for each combination of a given prompt and LoRA model, using a consistent seed for each prompt row. This is useful for direct, side-by-side comparisons.
-* `flux_dev_example_with_upscale.json`: An example ComfyUI workflow that is used by both scripts. This workflow is pre-configured and does not need to be modified manually. This is designed to run only with flux1-dev.safetensors with weight_dtype fp8_e4m3fn_fast. Only tested on a 4090 and all files must be in the same place for this to function. Using a different workflow may require editting the script.
+* `flux_dev_example_with_upscale.json`: An example ComfyUI workflow that is used by both scripts. This workflow is pre-configured and does not need to be modified.
 
+---
 ## How They Work
 
 Both scripts operate by programmatically controlling a ComfyUI instance. They take the base workflow (`flux_dev_example_with_upscale.json`), and for each image they need to generate, they modify the workflow in memory to:
@@ -20,6 +24,7 @@ Both scripts operate by programmatically controlling a ComfyUI instance. They ta
 
 The modified workflow is then queued to the ComfyUI server. The scripts wait for the generation to complete, retrieve the resulting image, and then display it in the user interface.
 
+---
 ## Requirements
 
 * **Python 3**: The scripts are written in Python and require it to run.
@@ -33,6 +38,7 @@ The modified workflow is then queued to the ComfyUI server. The scripts wait for
     ```
 * **Running ComfyUI Instance**: Both scripts need to connect to a running ComfyUI server. By default, they assume the server is at `127.0.0.1:8188`.
 
+---
 ## Setup
 
 1.  **Place Files**: Place the `lora_voter.py`, `grid_maker.py`, and `flux_dev_example_with_upscale.json` files together in the same folder.
@@ -40,7 +46,6 @@ The modified workflow is then queued to the ComfyUI server. The scripts wait for
 3.  **Run ComfyUI**: Start your ComfyUI server and ensure it is running before launching either script.
 
 ---
-
 ## LoRA Voter (`lora_voter.py`)
 
 The LoRA Voter is an interactive tool for ranking your LoRA models based on a series of head-to-head comparisons.
@@ -61,6 +66,7 @@ The LoRA Voter is an interactive tool for ranking your LoRA models based on a se
 6.  **Continue**: As soon as you vote, the application records your choice, clears the grid, and automatically starts the next round with a new prompt.
 7.  **View Scores**: After 10 rounds, a message box will appear with the final scores for each LoRA model.
 
+---
 ## Grid Maker (`grid_maker.py`)
 
 The Grid Maker is a utility for creating a comprehensive visual comparison sheet of your LoRA models.
@@ -77,3 +83,5 @@ The Grid Maker is a utility for creating a comprehensive visual comparison sheet
 3.  **Start Generation**: Click the **Start Generation** button.
 4.  **Monitor Progress**: The progress bar and status label will keep you updated on the generation process. Each row of the grid will use the same seed for all LoRAs.
 5.  **Generation Complete**: Once all images have been created, the script will automatically stitch them together into a grid and save it as `comparison_grid.png` in the same directory as the script. The final file path will be displayed in the status label.
+
+![Grid Maker UI](ui_examples/lora_grid_comaprison_grid_maker_ui_example.png)
